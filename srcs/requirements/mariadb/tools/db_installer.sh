@@ -6,7 +6,7 @@
 #    By: bsoubaig <bsoubaig@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 16:02:58 by bsoubaig          #+#    #+#              #
-#    Updated: 2023/11/08 16:47:22 by bsoubaig         ###   ########.fr        #
+#    Updated: 2023/11/08 17:12:04 by bsoubaig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,9 @@ mysql -u root -e "DELETE FROM mysql.user WHERE User='';"
 mysql -u root -e "DELETE FROM mysql.db WHERE Db='test';"
 
 # Inserting the data into the database
-mysql -u root -e "CREATE DATABASE IF NOT EXISTS wordpress;"
-mysql -u root -e "CREATE USER IF NOT EXISTS 'bsoubaig'@'%' IDENTIFIED BY 'CHANGE_THIS';"
-mysql -u root -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'bsoubaig'@'%' WITH GRANT OPTION;"
+mysql -u root -e "CREATE DATABASE IF NOT EXISTS $WP_DATABASE_NAME;"
+mysql -u root -e "CREATE USER IF NOT EXISTS '$WP_DATABASE_USER'@'%' IDENTIFIED BY '$WP_DATABASE_PASSWORD';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON $WP_DATABASE_NAME.* TO '$WP_DATABASE_USER'@'%' WITH GRANT OPTION;"
 mysql -u root -e "FLUSH PRIVILEGES;"
 
 # Shutdown MySQL in the background
