@@ -6,17 +6,25 @@
 #    By: bsoubaig <bsoubaig@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 16:03:03 by bsoubaig          #+#    #+#              #
-#    Updated: 2023/11/08 16:28:01 by bsoubaig         ###   ########.fr        #
+#    Updated: 2023/11/09 12:45:25 by bsoubaig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FROM alpine:3.17
+FROM alpine:3.16
 
-RUN mkdir -p /run/openrc && touch /run/openrc/softlevel
+# Update and install packages
+RUN apk update \
+	&& apk add --no-cache \
+		mariadb \
+		mariadb-client
 
-RUN apk update && apk add --no-cache mariadb mariadb-client openrc
-
+# Copy files
 COPY ./tools/db_installer.sh /tmp/db_installer.sh
+COPY ./conf/my.cnf /etc/mysql/my.cnf
 RUN chmod +x /tmp/db_installer.sh
 
+# Expose ports
+EXPOSE 3306
+
+# Run script
 CMD ["sh", "/tmp/db_installer.sh"]

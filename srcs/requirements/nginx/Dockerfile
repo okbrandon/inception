@@ -6,7 +6,7 @@
 #    By: bsoubaig <bsoubaig@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 16:30:39 by bsoubaig          #+#    #+#              #
-#    Updated: 2023/11/08 16:30:40 by bsoubaig         ###   ########.fr        #
+#    Updated: 2023/11/10 17:46:59 by bsoubaig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 RUN chmod -R 755 /var/www/html
 
 # Copying our configuration
-COPY ./conf/nginx.conf /etc/nginx/
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+COPY ./tools/index.html /var/www/html/index.html
 
 # Allowing needed port
 EXPOSE 443
