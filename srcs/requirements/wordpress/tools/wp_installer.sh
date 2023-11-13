@@ -6,7 +6,7 @@
 #    By: bsoubaig <bsoubaig@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 17:56:43 by bsoubaig          #+#    #+#              #
-#    Updated: 2023/11/10 18:15:05 by bsoubaig         ###   ########.fr        #
+#    Updated: 2023/11/13 17:33:38 by bsoubaig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,12 @@ while ! mariadb -h $DB_HOST -u $DB_USER -p$DB_PASSWORD -e ";" ; do
 	fi
 done
 echo "[INFO] Database connection established."
+
+# Installing wp-cli...
+echo "[INFO] Installing wp-cli..."
+wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > /dev/null 2>&1
+chmod +x wp-cli.phar
+mv wp-cli.phar /usr/local/bin/wp
 
 # Check if Wordpress is already installed
 if [ ! -f /var/www/html/wp-config.php ]; then
@@ -43,21 +49,15 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	rm -rf wordpress
 	rm -rf wordpress-6.4.tar.gz
 
-	# Configuring Wordpress's database
-	echo "[INFO] Configuring Wordpress's database..."
-	echo -e "<?php\n
-	define( 'DB_NAME', '$WP_DB_NAME' );\n
-	define( 'DB_USER', '$DB_USER' );\n
-	define( 'DB_PASSWORD', '$DB_PASSWORD' );\n
-	$(cat /tmp/wp-config.php)" > /tmp/wp-config.php
-	rm -rf /var/www/html/wp-config-sample.php
-	mv /tmp/wp-config.php /var/www/html/wp-config.php
-
 	# Installing Wordpress using wp-cli
 	echo "[INFO] Installing Wordpress using wp-cli..."
-	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > /dev/null 2>&1
-	chmod +x wp-cli.phar
-	mv wp-cli.phar /usr/local/bin/wp
+	wp config create --dbname=$WP_DB_NAME \
+		--dbuser=$DB_USER \
+		--dbpass=$DB_PASSWORD \
+		--dbhost=$DB_HOST \
+		--dbcharset="utf8" \
+		--dbprefix="wp_" \
+		--allow-root
 	wp core install --allow-root \
 		--path='/var/www/html/' \
 		--url=$WP_URL \
