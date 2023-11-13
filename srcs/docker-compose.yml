@@ -2,6 +2,7 @@ version: '3'
 
 services:
 
+  # Mandatory services
   mariadb:
     build: ./requirements/mariadb
     container_name: mariadb
@@ -34,10 +35,19 @@ services:
       - inception
     depends_on:
       - mariadb
+      - redis
     env_file:
       - .env
     volumes:
       - wordpress:/var/www/html
+
+  # Bonus services
+  redis:
+    build: ./requirements/bonus/redis
+    container_name: redis
+    restart: always
+    networks:
+      - inception
 
 networks:
   inception:

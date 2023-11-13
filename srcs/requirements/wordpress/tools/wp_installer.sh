@@ -6,7 +6,7 @@
 #    By: bsoubaig <bsoubaig@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 17:56:43 by bsoubaig          #+#    #+#              #
-#    Updated: 2023/11/13 17:33:38 by bsoubaig         ###   ########.fr        #
+#    Updated: 2023/11/13 17:34:49 by bsoubaig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,20 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 		--user_pass=$WP_CONTRIB_PASSWORD \
 		--role=contributor
 
+	# Configuring Redis-cache
+	echo "[INFO] Configuring redis-cache..."
+	sed -i "62i define('WP_REDIS_HOST', '$REDIS_HOST');" wp-config.php
+	sed -i "63i define('WP_REDIS_PORT', '$REDIS_PORT');" wp-config.php
+	sed -i "64i define('WP_REDIS_DATABASE', '0');" wp-config.php
+	sed -i "65i define('WP_REDIS_MAXTTL', 3600);" wp-config.php
+	sed -i "66i define('WP_REDIS_COMPRESSION', 'on');" wp-config.php
+	sed -i "67i define('WP_CACHE', true);" wp-config.php
+
+	# Installing plugins
+	echo "[INFO] Installing plugins..."
+	wp plugin install redis-cache --allow-root --path='/var/www/html/' --activate
+	wp plugin update --all --allow-root --path='/var/www/html/'
+
 	# Adjusting permissions again
 	echo "[INFO] Adjusting permissions..."
 	chown -R nginx:nginx /var/www/html/*
@@ -79,6 +93,14 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	find /var/www/html/ -type f -exec chmod 644 {} \;
 
 fi
+
+# A simple sleep to wait for redis
+sleep 2
+echo "[INFO] Redis should be ready."
+
+# Enable Redis plugin
+echo "[INFO] Enabling Redis plugin..."
+wp redis enable --allow-root --path='/var/www/html/'
 
 # Starting php-fpm
 echo "[INFO] Starting php-fpm..."
