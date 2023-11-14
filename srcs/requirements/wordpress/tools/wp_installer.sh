@@ -6,7 +6,7 @@
 #    By: bsoubaig <bsoubaig@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 17:56:43 by bsoubaig          #+#    #+#              #
-#    Updated: 2023/11/13 17:34:49 by bsoubaig         ###   ########.fr        #
+#    Updated: 2023/11/14 16:05:33 by bsoubaig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,9 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	sed -i "65i define('WP_REDIS_MAXTTL', 3600);" wp-config.php
 	sed -i "66i define('WP_REDIS_COMPRESSION', 'on');" wp-config.php
 	sed -i "67i define('WP_CACHE', true);" wp-config.php
+
+	# Fixing issue with FTP
+	sed -i "68i define('FS_METHOD', 'direct');" wp-config.php
 
 	# Installing plugins
 	echo "[INFO] Installing plugins..."
