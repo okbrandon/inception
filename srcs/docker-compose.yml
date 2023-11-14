@@ -49,6 +49,22 @@ services:
     networks:
       - inception
 
+  ftp:
+    build: ./requirements/bonus/ftp
+    container_name: ftp
+    restart: always
+    ports:
+      - "21:21"
+      - "40000-40100:40000-40100"
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    env_file:
+      - .env
+    volumes:
+      - wordpress:/var/www/html
+
 networks:
   inception:
     driver: bridge
