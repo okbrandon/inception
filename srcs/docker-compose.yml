@@ -6,7 +6,7 @@ services:
   mariadb:
     build: ./requirements/mariadb
     container_name: mariadb
-    restart: always
+    restart: on-failure
     networks:
       - inception
     env_file:
@@ -17,7 +17,7 @@ services:
   nginx:
     build: ./requirements/nginx
     container_name: nginx
-    restart: always
+    restart: on-failure
     ports:
       - "443:443"
     networks:
@@ -30,7 +30,7 @@ services:
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
-    restart: always
+    restart: on-failure
     networks:
       - inception
     depends_on:
@@ -45,14 +45,14 @@ services:
   redis:
     build: ./requirements/bonus/redis
     container_name: redis
-    restart: always
+    restart: on-failure
     networks:
       - inception
 
   ftp:
     build: ./requirements/bonus/ftp
     container_name: ftp
-    restart: always
+    restart: on-failure
     ports:
       - "21:21"
       - "40000-40100:40000-40100"
@@ -68,7 +68,7 @@ services:
   adminer:
     build: ./requirements/bonus/adminer
     container_name: adminer
-    restart: always
+    restart: on-failure
     ports:
       - "8080:8080"
     networks:
@@ -76,11 +76,24 @@ services:
     depends_on:
       - mariadb
 
+  uptime-kuma:
+    build: ./requirements/bonus/uptime-kuma
+    container_name: uptime-kuma
+    restart: on-failure
+    ports:
+      - "3001:3001"
+    networks:
+      - inception
+    volumes:
+      - uptime-kuma:/app
+
 networks:
   inception:
     driver: bridge
 
 volumes:
+
+  # Mandatory volumes
   wordpress:
     driver: local
     name: wordpress
@@ -94,4 +107,13 @@ volumes:
     driver_opts:
       type: none
       device: ~/data/mariadb
+      o: bind
+  
+  # Bonus volumes
+  uptime-kuma:
+    driver: local
+    name: uptime-kuma
+    driver_opts:
+      type: none
+      device: ~/data/uptime-kuma
       o: bind
