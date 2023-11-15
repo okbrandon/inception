@@ -65,6 +65,17 @@ services:
     volumes:
       - wordpress:/var/www/html
 
+  adminer:
+    build: ./requirements/bonus/adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+
 networks:
   inception:
     driver: bridge
