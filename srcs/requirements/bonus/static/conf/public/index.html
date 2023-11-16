@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Brandon's coding</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+    <body>
+        <!-- partial:index.partial.html -->
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>Some event</title>
+                <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800,900" rel="stylesheet" type='text/css'>
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <link rel="stylesheet" href="./css/style.css">
+            </head>
+            <body>
+                <svg display="none">
+                    <symbol version="1.1" id="github" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        width="32" height="32" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;"
+                        xml:space="preserve">
+                        <g>
+                            <path d="M 16 0 C 7.16 0 0 7.16 0 16 c 0 7.08 4.58 13.06 10.94 15.18 c 0.8 0.14 1.1 -0.34 1.1 -0.76 c 0 -0.38 -0.02 -1.64 -0.02 -2.98 c -4.02 0.74 -5.06 -0.98 -5.38 -1.88 c -0.18 -0.46 -0.96 -1.88 -1.64 -2.26 c -0.56 -0.3 -1.36 -1.04 -0.02 -1.06 c 1.26 -0.02 2.16 1.16 2.46 1.64 c 1.44 2.42 3.74 1.74 4.66 1.32 c 0.14 -1.04 0.56 -1.74 1.02 -2.14 c -3.56 -0.4 -7.28 -1.78 -7.28 -7.9 c 0 -1.74 0.62 -3.18 1.64 -4.3 c -0.16 -0.4 -0.72 -2.04 0.16 -4.24 c 0 0 1.34 -0.42 4.4 1.64 c 1.28 -0.36 2.64 -0.54 4 -0.54 c 1.36 0 2.72 0.18 4 0.54 c 3.06 -2.08 4.4 -1.64 4.4 -1.64 c 0.88 2.2 0.32 3.84 0.16 4.24 c 1.02 1.12 1.64 2.54 1.64 4.3 c 0 6.14 -3.74 7.5 -7.3 7.9 c 0.58 0.5 1.08 1.46 1.08 2.96 c 0 2.14 -0.02 3.86 -0.02 4.4 c 0 0.42 0.3 0.92 1.1 0.76 A 16.024 16.024 90 0 0 32 16 c 0 -8.84 -7.16 -16 -16 -16 z"/>
+                        </g>
+                    </symbol>
+                    <symbol version="1.1" id="discord" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
+                        <g>
+                            <g>
+                                <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
+                            </g>
+                        </g>
+                    </symbol>
+                </svg>
+                <main>
+                    <canvas class="plane-canvas" id="plane-canvas"></canvas>
+                    <canvas class="main-canvas" id="main-canvas"></canvas>
+                    <div class="mouse" id="mouse">hold left click</div>
+                    <div class="plate">
+                        <h2 class="text-animation" data-js="text">backend developer</h2>
+                        <p class="text-animation" data-js="text">software engineer student at 42 School</p>
+                        <div class="social" id="social">
+                            <a target="_blank" class="social__discord" href="https://discord.com/users/tadasuke">
+                                <svg viewBox="0 0 32 32">
+                                    <use xlink:href="#discord"></use>
+                                </svg>
+                            </a>
+                            <a target="_blank" class="social__github" href="https://github.com/okbrandon">
+                                <svg viewBox="0 0 32 32">
+                                    <use xlink:href="#github"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </main>
+            </body>
+        </html>
+        <!-- partial -->
+        <script  src="./js/script.js"></script>
+    </body>
+</html>
