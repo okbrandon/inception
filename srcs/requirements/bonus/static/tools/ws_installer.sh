@@ -1,27 +1,28 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Dockerfile                                         :+:      :+:    :+:    #
+#    ws_installer.sh                                    :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: bsoubaig <bsoubaig@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/16 18:29:15 by bsoubaig          #+#    #+#              #
-#    Updated: 2023/11/19 18:08:55 by bsoubaig         ###   ########.fr        #
+#    Created: 2023/11/19 18:04:50 by bsoubaig          #+#    #+#              #
+#    Updated: 2023/11/19 18:12:45 by bsoubaig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FROM alpine:3.17
+#!/bin/sh
 
-RUN apk update \
-	&& apk add --no-cache nodejs npm git
+if [ ! -d "/app/public" ]; then
+	
+	mkdir /app/public
 
-RUN mkdir -p /app
+	# Scrapping website
+	echo "[INFO] Scrapping website..."
+	git clone https://github.com/okbrandon/brandoncodes.dev.git /app/public > /dev/null 2>&1
+	chmod -R 755 /app/public
+	
+fi
 
-WORKDIR /app
-
-COPY ./conf/server.js /app/server.js
-COPY ./tools/ws_installer.sh /tmp/ws_installer.sh
-
-EXPOSE 4242
-
-CMD ["/bin/sh", "/tmp/ws_installer.sh"]
+# Start server
+echo "[INFO] Starting server..."
+node server.js
