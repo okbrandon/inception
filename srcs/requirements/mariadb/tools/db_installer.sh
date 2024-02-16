@@ -6,7 +6,7 @@
 #    By: bsoubaig <bsoubaig@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 16:02:58 by bsoubaig          #+#    #+#              #
-#    Updated: 2023/11/09 14:41:23 by bsoubaig         ###   ########.fr        #
+#    Updated: 2024/02/16 11:38:03 by bsoubaig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,9 @@
 
 # Assign the ownership of the directory to the MySQL user and group
 chown -R mysql:mysql /var/lib/mysql
+
+# Replace the port in the MySQL configuration file
+sed -i "s/REPLACE_MYSQL_PORT/$DB_PORT/g" /etc/mysql/my.cnf
 
 # Initialize MySQL database
 mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
