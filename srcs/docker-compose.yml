@@ -24,6 +24,8 @@ services:
       - "443:443"
     networks:
       - inception
+    env_file:
+      - .env
     depends_on:
       - wordpress
     volumes:
