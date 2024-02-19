@@ -55,7 +55,7 @@ Build and run the `Inception` project containers:
 ```sh
 make all
 ```
-> [!INFO]
+> [!NOTE]
 > This command will build the containers with docker-compose and run them.
 
 ## 📝 Usage
