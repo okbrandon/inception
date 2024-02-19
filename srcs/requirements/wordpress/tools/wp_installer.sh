@@ -6,7 +6,7 @@
 #    By: bsoubaig <bsoubaig@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 17:56:43 by bsoubaig          #+#    #+#              #
-#    Updated: 2023/11/14 16:05:33 by bsoubaig         ###   ########.fr        #
+#    Updated: 2024/02/19 09:13:35 by bsoubaig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,9 @@ while ! mariadb -h $DB_HOST -u $DB_USER -p$DB_PASSWORD -e ";" ; do
 	fi
 done
 echo "[INFO] Database connection established."
+
+# Replacing ports from env
+sed -i "s/REPLACE_WP_PORT/$WP_PORT/g" /etc/php8/php-fpm.d/www.conf
 
 # Installing wp-cli...
 echo "[INFO] Installing wp-cli..."
